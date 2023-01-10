@@ -145,3 +145,5 @@ EMAIL_POST=587
 EMAIL_HOST_USER='wcedummy7798@gmail.com'
 EMAIL_HOST_PASSWORD='xfntjvmnfwobaoqi'
 EMAIL_USE_TLS=True
+
+CSRF_TRUSTED_ORIGINS = ['https://bridgestoneprojecthostrepo-production.up.railway.app']
