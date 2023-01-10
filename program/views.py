@@ -124,14 +124,13 @@ def businessUnitCreate(request):
         form = BusinessUnitForm(request.POST)
         if form.is_valid():
             program = form.save(commit=False)
-            program.coordinator = request.user
             program.save()
-            return redirect('program', program.id)
+            return redirect('admin-panel')
         else:
             context = {
                 'form' : form,
             }
-            return render(request, 'program/business_unit_form.html', context)
+            return render(request, 'program/program_form.html', context)
 
 
 @login_required(login_url='login')
@@ -151,18 +150,18 @@ def businessUnitUpdate(request, pk):
         context = {
             'form': form
         }
-        return render(request, 'program/business_unit_form.html', context)
+        return render(request, 'program/program_form.html', context)
 
 
 
 @login_required(login_url='login')
 def businessUnitDelete(request, pk):
-    program = Program.objects.get(id=pk)
+    business_unit = BusinessUnit.objects.get(id=pk)
     if request.method == 'POST':
-        program.delete()
+        business_unit.delete()
         return redirect('program-list')
     else:
         context = {
-            'program' : program,
+            'program' : business_unit,
         }
         return render(request, 'program/business_unit_delete_confirmation.html')
