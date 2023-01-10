@@ -68,3 +68,16 @@ def ideaUpdate(request, pk):
         form = IdeaForm(request.POST, request.FILES, instance=idea)
         form.save()
         return redirect('idea', idea.id)
+
+@login_required(login_url='login')
+def ideaDelete(request, pk):
+    idea = Idea.objects.get(id=pk)
+    if request.user != idea.ideator:
+        return redirect('access-denied')
+    if request.method == 'POST':
+        idea.delete()
+        return redirect('home')
+    context = {
+        'idea' : idea,
+    }
+    return render(request, 'idea/idea_delete.html', context)

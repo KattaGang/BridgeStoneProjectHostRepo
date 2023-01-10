@@ -30,6 +30,7 @@
 <hr>
 {% if idea.ideator == request.user %}
 <a href="{% url 'idea-update' idea.id %} " class="btn btnsec textred">Update</a>
+<a href="{% url 'idea-delete' idea.id %} " class="btn btnsec textred">Delete</a>
 {% endif %}
 
 {% if jury == request.user %}
