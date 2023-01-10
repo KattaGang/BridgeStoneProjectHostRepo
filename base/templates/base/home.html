@@ -13,7 +13,7 @@
                 <h2 class="mdheading">{{business_unit.name}}</h2>
                 <p>{{business_unit.description}}
                 </p>
-                <a href="#{{business_unit.program.id}}">
+                <a href="#{{business_unit.id}}">
                     <button type="submit" class="btn btnsign">Click here </button></a>
             </div>
 
@@ -26,7 +26,7 @@
 
 </section>
 {% for program in programs %}
-<section class="showcase" id="{{program.id}}">
+<section class="showcase" id="{{program.business_unit.id}}">
     <div class="container">
         <div class="row">
             <div class="imagebox">
@@ -50,14 +50,14 @@
     <div class="container">
         <h1>KNOW YOUR IDEA CHAMPION</h1>
         <div class="boxwrap">
-            {% for program in programs %}
+            {% for business_unit in business_units %}
             <div class="champ champ1">
 
                 <i class="fa-solid fa-user fa-6x textred"></i>
 
-                <h3 class="mdheading">{{program.business_unit.jury.profile}}</h3>
-                <h4>{{program.business_unit.name}}</h4>
-                <a href="{% url 'profile' program.business_unit.jury.profile.id %}">
+                <h3 class="mdheading">{{business_unit.jury.profile}}</h3>
+                <h4>{{business_unit.name}}</h4>
+                <a href="{% url 'profile' business_unit.jury.profile.id %}">
                     <button type="submit" class="btn btnsign">Click here to view Profile </button>
                 </a>
             </div>
