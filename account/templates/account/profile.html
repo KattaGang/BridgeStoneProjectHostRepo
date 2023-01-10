@@ -8,8 +8,22 @@
     <a href="#"><i class="fa fa-google"></i> - {{user.email}}</a>
     <p>Contact : {{user.profile.mobile}}</p>
     {% if request.user == user %}
+    {% if user.profile.is_admin %}
+    <p>
+        Admin
+    </p>
+    {% endif %}
+    {% if user.profile.is_jury %}
+    <p>
+        Idea Champion
+    </p>
+    {% endif %}
+
     <button>
         <a href="{% url 'profile-update' %}" style="color: aliceblue;">Update</a>
+    </button>
+    <button>
+        <a href="{% url 'idea-list' %}" style="color: aliceblue;">View Ideas</a>
     </button>
     {% endif %}
 </div>

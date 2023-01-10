@@ -130,8 +130,15 @@ def inviteUser(request):
 @login_required(login_url='login')
 def viewInvitation(request, pk):
     invitation = Invitation.objects.get(id=pk)
-    # if (request.user.email != invitation.email) and (request.user != invitation.admin):
-    #     return redirect('access-denied')
+    if (request.user.email != invitation.email) and (request.user != invitation.admin):
+        return redirect('access-denied')
+    if request.method == 'POST':
+        if invitation.post == 'Jury':
+            request.user.profile.is_admin = True
+        else:
+            request.user.profile.is_jury = True
+        request.user.profile.save()
+        return redirect('user-profile')
     context = {
         'invitation': invitation,
     }

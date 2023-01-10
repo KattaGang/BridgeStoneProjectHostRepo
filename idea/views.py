@@ -46,7 +46,7 @@ def ideaCreate(request, pk):
 
 @login_required(login_url='login')
 def ideaList(request):
-    ideas = Idea.objects.all()
+    ideas = Idea.objects.filter(ideator=request.user)
     context = {
         'ideas': ideas,
     }

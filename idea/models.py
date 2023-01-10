@@ -33,8 +33,8 @@ class Idea(models.Model):
     ideator = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL)
     program = models.ForeignKey(Program, null=True, on_delete=models.SET_NULL)
-    projected_revenue = models.BigIntegerField(null=True)
-    actual_net_revenue = models.BigIntegerField(null=True, blank=True)
+    projected_revenue = models.BigIntegerField(null=True, default=0)
+    actual_net_revenue = models.BigIntegerField(null=True, default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     score = models.IntegerField(default=0)

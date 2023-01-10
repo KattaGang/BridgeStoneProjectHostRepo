@@ -1,16 +1,73 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'styles/jury.css' %}">
 
-<div>
-    {% for idea in ideas %}
-    <div>
-        <p>
-            <a href="{% url 'idea' idea.id %}">
-                {{idea.title}}
-            </a>
-        </p>
+<section class="jury">
+    <div class="container">
+        <div class="formwrap">
+            <div class="filter">
+                <div class="filterhead">
+                    <i class="fa-solid fa-filter fa-4x textred"></i>
+                    <h2 class="textgray mdheading">Filters</h2>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label for="Pending">Pending</label>
+                    <input type="checkbox" name="0" id="Pending"><br>
+
+                    <label for="Active">Active</label>
+                    <input type="checkbox" name="1" id="Active"><br>
+
+                    <label for="Handoff">Handoff</label>
+                    <input type="checkbox" name="2" id="Handoff"><br>
+
+                    <label for="Completed">Completed</label>
+                    <input type="checkbox" name="3" id="Completed"><br>
+
+                    <label for="Paused">Paused</label>
+                    <input type="checkbox" name="4" id="Paused"><br>
+
+                    <label for="Stopped">Stopped</label>
+                    <input type="checkbox" name="5" id="Stopped"><br>
+
+                    <label for="Put On Hold">Put On Hold</label>
+                    <input type="checkbox" name="6" id="Put On Hold"><br>
+
+                    <label for="Rejected">Rejected</label>
+                    <input type="checkbox" name="7" id="Rejected"><br>
+
+
+                    <button type="submit" class="btn btnsign">Apply</button>
+                </form>
+            </div>
+            {% for idea in ideas %}
+            <form class="juryform">
+                <div class="formgroup">
+                    <label for="Title_idea">Title of Idea</label>
+                    <input type="text" name="Title_idea" id="Title_idea" value="{{idea.title}}">
+                </div>
+                <div class="formgroup">
+                    <label for="name">Name of Ideater</label>
+                    <input type="text" name="" value="{{idea.ideator.profile.name}}" id="name">
+                </div>
+                <div class="formgroup">
+                    <label for="department">Summary</label>
+                    <input type="text" name="" id="department" value="{{idea.summary}}">
+                </div>
+                <div class="formgroup">
+                    <label for="department">Status</label>
+                    <input type="text" name="" id="department" value="{{idea.getStatus}}">
+                </div>
+                <div class="formgroup">
+                    <a href="{% url 'idea' idea.id %}" class="btn btnsec textred">View</a>
+                </div>
+
+            </form>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
     </div>
-    {% endfor %}
-</div>
-{% endblock content %}
 
+</section>
+{% endblock content %}

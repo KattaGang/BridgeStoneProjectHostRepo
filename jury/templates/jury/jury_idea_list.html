@@ -60,6 +60,7 @@
                     <input type="text" name="" id="department" value="{{idea.getStatus}}">
                 </div>
                 <div class="formgroup">
+                    <a href="{% url 'idea' idea.id %}" class="btn btnsec textred">View</a>
                     <a href="{% url 'idea-change-status' idea.id %}" class="btn btnsec textred">Change Status</a>
                 </div>
 
