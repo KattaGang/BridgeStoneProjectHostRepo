@@ -1,0 +1,77 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+<section class="buunit">
+    <div class="container">
+        <h1>Business Units You are Jury for :</h1>
+        <div class="boxwrap">
+            {% for program in programs %}
+            <div class="bu bu1">
+
+                <i class="fa-solid fa-bullhorn fa-3x textred"></i>
+                <h2 class="mdheading">{{program.business_unit.name}}</h2>
+                <p>{{program.business_unit.description}}
+                </p>
+                <a href="#{{program.id}}">
+                    <button type="submit" class="btn btnsign">Click here </button></a>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+{% for idea in ideas %}
+<section class="showcase" id="{{program.id}}">
+    <div class="container">
+        <div class="row">
+            <div class="imagebox">
+                <img src="{{idea.image.url}}" alt="">
+            </div>
+            <div class="textbox">
+                <h2 class="lgheading textdark">{{idea.title}}</h2>
+                <p class="textgray">{{idea.summary}}
+                    <br>
+                    <b>Ideator</b> - {{idea.ideator.username}}
+                </p>
+                <a href="{% url 'idea' idea.id %}" class="btn btnsec textred">View</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+</section>
+
+
+
+
+<div>
+    
+</div>
+<div>
+    {% for program in programs %}
+    <p>
+        <a href="{% url 'program' program.id %}">
+            {{program}}
+        </a>
+    </p>
+    {% endfor %}
+</div>
+<hr>
+<div>
+    Ideas To be evaluated :
+</div>
+<div>
+    {% for idea in ideas %}
+    <p>
+        <a href="{% url 'idea' idea.id %}">
+            {{idea}}
+        </a>
+        <a href="{% url 'idea-accept' idea.id %}">Accept</a>
+        <a href="{% url 'idea-reject' idea.id %}">Reject</a>
+        <a href="{% url 'idea-put-on-hold' idea.id %}">Put On Hold</a>
+    </p>
+    {% endfor %}
+</div>
+{% endblock content %}

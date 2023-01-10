@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/programpage.css' %}">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/fb6c14db56.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <main>
+        <container>
+            <div class="Image"> <img src="{{program.image.url}}" alt="Check Your Internet"></div>
+            <br>
+            <div class="Text">
+                <p>
+                    {{program.description}}</p>
+                <br>
+                <h1>{{program.name}}</h1>
+
+                <div>
+                    {% if request.user.profile.is_admin %}
+                    <a href="{% url 'program-update' program.id %}">Update</a>
+                    <a href="{% url 'program-delete' program.id %}">Delete</a>
+                    {% endif %}
+                </div>
+                <div>
+                    <a href="{% url 'idea-create' program.id %}">Apply</a>
+                </div>
+
+                <div>
+
+                    <div>
+                        Start Date - {{program.start_time}}
+                    </div>
+                    <div>
+                        End Date - {{program.end_time}}
+                    </div>
+                    <hr>
+                    <div>
+                        Application Start Date - {{program.application_start_time}}
+                    </div>
+                    <div>
+                        Application End Date - {{program.application_end_time}}
+                    </div>
+                </div>
+                <div>
+                    <hr>
+                </div>
+
+                <div>
+                    <hr>
+                    <h4>Ideas</h4>
+                    {% for idea in ideas %}
+                    <div>
+                        {{idea}}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </container>
+    </main>
+    {% include 'footer.html' %}
+</body>
+
+</html>

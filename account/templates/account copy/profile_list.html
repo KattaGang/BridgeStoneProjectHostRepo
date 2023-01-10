@@ -1,0 +1,9 @@
+<div>
+{% for profile in profiles %}
+<a href="{% url 'profile' profile.user.id %}">{{profile}}</a>
+<div>
+    from {{profile.city}}
+</div>
+<hr>
+{% endfor %}
+</div>

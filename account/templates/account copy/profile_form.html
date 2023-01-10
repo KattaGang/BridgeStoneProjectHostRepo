@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% block content %}
+<section class="personalform">
+  <div class="container">
+    <h2 class="lgheading">Personal Details</h2>
+    <form class="signupform" enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <button type="submit" class="btn btnsign">Submit</button>
+    </form>
+  </div>
+</section>
+{% endblock content %}

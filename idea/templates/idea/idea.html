@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<div>
+    <p>
+        <a href="{% url 'idea-list' %}">All Ideas</a>
+    </p>
+</div>
+
+<div>
+    <h1>{{idea.title}}</h1>
+</div>
+
+<div>
+    <p>
+        Status : {{idea_status}}
+    </p>
+</div>
+<div>
+    {{jury}}
+{% if jury == request.user %}
+<a href="{% url 'idea-change-status' idea.id %}">Change Status</a>
+{% else %}
+{% endif %}
+</div>
+<hr>
+
+<div>
+    <p>
+        {{idea.description}}
+    </p>
+</div>
+{% if idea.image %}
+<div>
+    <img src="{{idea.image.url}}" alt="">
+</div>
+{% endif %}
+{% if idea.ideator == request.user %}
+<a href="{% url 'idea-update' idea.id %}">Update</a>
+{% endif %}
+{% endblock content %}

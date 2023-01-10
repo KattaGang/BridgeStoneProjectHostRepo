@@ -1,0 +1,33 @@
+{% extends 'account/base.html' %}
+{% load static %}
+  {% block content %}
+    <header class="header">
+        <nav class="container navbar ">
+        <h1 class="logo textlight">Idea Manangment</h1>
+       </nav>
+       <section class=" signup">
+        <h2 class="lgheading textlight">Sign up</h2>
+        <form class="signupform" method="POST">
+            {% csrf_token %}
+            <div class="formgroup">
+                <label for="Username" class="textlight">Username</label>
+                <input type="text"  id="Username" name="username"  required>
+            <div class="formgroup">
+                <label for="Email" class="textlight">Email</label>
+                <input type="Email"  id="Email" name="email"  required>
+            <div class="formgroup">
+                <label for="Password" class="textlight">Password</label>
+                <input type="Password"  id="Password" name="password1" required>
+            </div>           
+            <div class="formgroup">
+                <label for="Confirm Password" class="textlight">Confirm Password</label>
+                <input type="Password"  id="Confirm Password" name="password2" required>
+            </div>
+                <!-- <a href="./home.html" class="btn btnsign">Log in</a> -->
+                <button type="submit" class="btn btnsign">Sign up </button>
+                
+            </div>
+        </form>
+    </section>  
+    </header>
+    {% endblock content %}

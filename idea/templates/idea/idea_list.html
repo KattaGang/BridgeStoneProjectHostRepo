@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    {% for idea in ideas %}
+    <div>
+        <p>
+            <a href="{% url 'idea' idea.id %}">
+                {{idea.title}}
+            </a>
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
+

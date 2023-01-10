@@ -1,0 +1,15 @@
+       <section class=" signup">
+        <h2 class="lgheading textlight">Sign in</h2>
+        <form class="signupform">
+            <div class="formgroup">
+                <label for="Email" class="textlight">Email</label>
+                <input type="Email" name="Email" id="Email" required>
+            <div class="formgroup">
+                <label for="Password" class="textlight">Password</label>
+                <input type="Password" name="Password" id="Password" required>
+            </div>
+                <a href="login" class="btn btnsign">Log in</a>
+                <!-- <button type="submit" class="btn btnsign">Log in </button> -->
+            </div>
+        </form>
+    </section> 

@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block content %}
+<div>
+    <a href="{% url 'program-create' %}">Add Program</a>
+</div>
+<hr>
+<div>
+    {% for program in programs %}
+    <div class="program-container">
+        <a href="{% url 'program' program.id %}">{{program.name}}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

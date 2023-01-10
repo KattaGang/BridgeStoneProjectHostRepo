@@ -1,0 +1,7 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1>{{user.first_name}} {{user.last_name}}</h1>
+<p>from - {{user.profile.city}}, {{user.profile.state}}</p>
+<img src="{{user.profile.image.url}}" alt="" />
+<a href="{% url 'profile-update' %}">Update</a>
+{% endblock content %}

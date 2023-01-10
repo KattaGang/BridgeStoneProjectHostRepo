@@ -1,0 +1,16 @@
+{% extends 'main2.html' %}
+{% block content %}
+<div class="card">
+    <img src="{{user.profile.image.url}}" alt="John" style="width:100%">
+    <h1>{{user.profile.name}}</h1>
+    <p class="title">{{user.profile.department}}</p>
+    <p>{{user.profile.city}}</p>
+    <a href="#"><i class="fa fa-google"></i> - {{user.email}}</a>
+    <p>Contact : {{user.profile.mobile}}</p>
+    {% if request.user == user %}
+    <button>
+        <a href="{% url 'profile-update' %}" style="color: aliceblue;">Update</a>
+    </button>
+    {% endif %}
+</div>
+{% endblock content %}
