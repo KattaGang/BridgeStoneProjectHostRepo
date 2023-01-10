@@ -2,12 +2,6 @@
 {% block content %}
 {% load static %}
 <div>
-    <p>
-        <a href="{% url 'idea-list' %}">All Ideas</a>
-    </p>
-</div>
-
-<div>
     <h1>{{idea.title}}</h1>
 </div>
 
@@ -17,11 +11,9 @@
     </p>
 </div>
 <div>
-    {{jury}}
-{% if jury == request.user %}
-<a href="{% url 'idea-change-status' idea.id %}">Change Status</a>
-{% else %}
-{% endif %}
+    <p>
+        Idea Champion - {{jury}}
+    </p>
 </div>
 <hr>
 
@@ -35,7 +27,13 @@
     <img src="{{idea.image.url}}" alt="">
 </div>
 {% endif %}
+<hr>
 {% if idea.ideator == request.user %}
-<a href="{% url 'idea-update' idea.id %}">Update</a>
+<a href="{% url 'idea-update' idea.id %} " class="btn btnsec textred">Update</a>
+{% endif %}
+
+{% if jury == request.user %}
+<a href="{% url 'idea-change-status' idea.id %}" class="btn btnsec textred">Change Status</a>
+{% else %}
 {% endif %}
 {% endblock content %}

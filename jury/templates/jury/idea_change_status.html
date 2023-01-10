@@ -2,7 +2,9 @@
 {% block content %}
 <form method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Change" />
+    <div class="formgroup">
+        {{form.as_p}}
+    </div>
+    <button type="submit" class="btn btnsign">Change Status</button>
 </form>
 {% endblock content %}

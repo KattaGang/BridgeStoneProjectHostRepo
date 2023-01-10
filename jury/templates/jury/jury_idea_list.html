@@ -1,50 +1,73 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
-    <link rel="stylesheet" href="{% static 'styles/jury.css' %}">
+<link rel="stylesheet" href="{% static 'styles/jury.css' %}">
 
-     <section class="jury">
-        <div class="container">
-            <div class="formwrap">
-                <div class="filter">
-                    <div class="filterhead">
-                        <i class="fa-solid fa-filter fa-4x textred"></i>
-                        <h2 class="textgray mdheading">Filters</h2>
-                    </div>
-                    <label for="Visited">Visited</label>
-                    <input type="radio" name="" id="Visited"><br>
-                    <label for="Non-Visited">Non-Visited</label>
-                    <input type="radio" name="" id="Non-Visited"><br>
-                    <label for="Accepted">Accepted</label>
-                    <input type="radio" name="" id="Accepted"><br>
-                    <label for="Rejected">Rejected</label>
-                    <input type="radio" name="" id="Rejected"><br>
-                    <label for="Hold">Hold</label>
-                    <input type="radio" name="" id="Hold"><br>
-    
-                    <button type="submit" class="btn btnsign">Apply</button>
+<section class="jury">
+    <div class="container">
+        <div class="formwrap">
+            <div class="filter">
+                <div class="filterhead">
+                    <i class="fa-solid fa-filter fa-4x textred"></i>
+                    <h2 class="textgray mdheading">Filters</h2>
                 </div>
-                {% for idea in ideas %}
-                <form class="juryform"> 
-                    <div class="formgroup">
-                        <label for="name">Name of Ideater</label>
-                        <input type="text" name="" value="{{idea}}" id="name">
-                    </div>
-                    <div class="formgroup">
-                        <label for="department">Name of Department</label>
-                        <input type="text" name="" id="department">
-                    </div>
-                    <div class="formgroup">
-                        <label for="Title_idea">Title of Idea</label>
-                        <input type="text" name="Title_idea" id="Title_idea" >
-                        <button type="submit" class="btn btnsign">Apply</button>
-                    </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label for="Pending">Pending</label>
+                    <input type="checkbox" name="0" id="Pending"><br>
 
+                    <label for="Active">Active</label>
+                    <input type="checkbox" name="1" id="Active"><br>
+
+                    <label for="Handoff">Handoff</label>
+                    <input type="checkbox" name="2" id="Handoff"><br>
+
+                    <label for="Completed">Completed</label>
+                    <input type="checkbox" name="3" id="Completed"><br>
+
+                    <label for="Paused">Paused</label>
+                    <input type="checkbox" name="4" id="Paused"><br>
+
+                    <label for="Stopped">Stopped</label>
+                    <input type="checkbox" name="5" id="Stopped"><br>
+
+                    <label for="Put On Hold">Put On Hold</label>
+                    <input type="checkbox" name="6" id="Put On Hold"><br>
+
+                    <label for="Rejected">Rejected</label>
+                    <input type="checkbox" name="7" id="Rejected"><br>
+
+
+                    <button type="submit" class="btn btnsign">Apply</button>
                 </form>
-                {% endfor %}
-                <div class="clearfix"></div>
             </div>
-        </div>
+            {% for idea in ideas %}
+            <form class="juryform">
+                <div class="formgroup">
+                    <label for="Title_idea">Title of Idea</label>
+                    <input type="text" name="Title_idea" id="Title_idea" value="{{idea.title}}">
+                </div>
+                <div class="formgroup">
+                    <label for="name">Name of Ideater</label>
+                    <input type="text" name="" value="{{idea.ideator.profile.name}}" id="name">
+                </div>
+                <div class="formgroup">
+                    <label for="department">Summary</label>
+                    <input type="text" name="" id="department" value="{{idea.summary}}">
+                </div>
+                <div class="formgroup">
+                    <label for="department">Status</label>
+                    <input type="text" name="" id="department" value="{{idea.getStatus}}">
+                </div>
+                <div class="formgroup">
+                    <a href="{% url 'idea-change-status' idea.id %}" class="btn btnsec textred">Change Status</a>
+                </div>
 
-     </section>
- {% endblock content %}
+            </form>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</section>
+{% endblock content %}

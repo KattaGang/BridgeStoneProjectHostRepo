@@ -18,6 +18,11 @@ def juryIdeaList(request):
     for business_unit in business_units:
         programs = programs | Program.objects.filter(business_unit=business_unit)
     ideas = Idea.objects.filter(business_unit=business_unit)
+    if request.method == 'POST':
+        ideas = Idea.objects.filter(id=-1)
+        for i in range(0, 8):
+            if request.POST.get(str(i)):
+                ideas = ideas | Idea.objects.filter(status=i)
     context = {
         'user': user,
         'programs': programs,
