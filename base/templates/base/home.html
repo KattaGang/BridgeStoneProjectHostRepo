@@ -6,14 +6,14 @@
     <div class="container">
         <h1>Select Your Department</h1>
         <div class="boxwrap">
-            {% for program in programs %}
+            {% for business_unit in business_units %}
             <div class="bu bu1">
 
                 <i class="fa-solid fa-bullhorn fa-3x textred"></i>
-                <h2 class="mdheading">{{program.business_unit.name}}</h2>
-                <p>{{program.business_unit.description}}
+                <h2 class="mdheading">{{business_unit.name}}</h2>
+                <p>{{business_unit.description}}
                 </p>
-                <a href="#{{program.id}}">
+                <a href="#{{business_unit.program.id}}">
                     <button type="submit" class="btn btnsign">Click here </button></a>
             </div>
 

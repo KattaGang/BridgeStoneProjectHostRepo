@@ -4,11 +4,11 @@
             <h1 class="logo lgheading textlight">Idea Manangment </h1>
             <ul class="navitems textlight">
                 <li class="navitem "><a href="{% url 'home' %}">HOME</a></li>
-                {% if request.user.profile.is_admin %}
-                <li class="navitem "><a href="{% url 'program-create' %}">Add Program</a></li>
-                {% endif %}
                 {% if request.user.profile.is_jury %}
                 <li class="navitem "><a href="{% url 'jury-idea-list' %}">View Ideas</a></li>
+                {% endif %}
+                {% if request.user.profile.is_admin %}
+                <li class="navitem "><a href="{% url 'admin-panel' %}">Admin Panel</a></li>
                 {% endif %}
                 <li class="navitem "><a href="{% url 'profile' request.user.profile.id %}">PROFILE</a></li>
                 <li class="navitem "><a href="{% url 'logout' %}">LOGOUT</a></li>

@@ -115,13 +115,13 @@ def businessUnitCreate(request):
     if not request.user.profile.is_admin:
         return redirect('unauthorized_access')
     if request.method == 'GET':
-        form = ProgramForm()
+        form = BusinessUnitForm()
         context = {
             'form': form,
         }
         return render(request, 'program/program_form.html', context)
     else:
-        form = ProgramForm(request.POST)
+        form = BusinessUnitForm(request.POST)
         if form.is_valid():
             program = form.save(commit=False)
             program.coordinator = request.user
@@ -131,28 +131,27 @@ def businessUnitCreate(request):
             context = {
                 'form' : form,
             }
-            return render(request, 'program/program_form.html', context)
+            return render(request, 'program/business_unit_form.html', context)
 
 
 @login_required(login_url='login')
 def businessUnitUpdate(request, pk):
-    program = Program.objects.get(id=pk)
-    print(program.name)
+    business_unit = BusinessUnit.objects.get(id=pk)
     if request.method == 'GET':
-        form = ProgramForm(instance=program)
+        form = BusinessUnitForm(instance=business_unit)
         context = {
             'form': form,
         }
         return render(request, 'program/program_form.html', context)
     else:
-        form = ProgramForm(request.POST, instance=program)
+        form = BusinessUnitForm(request.POST, instance=business_unit)
         if form.is_valid():
             form.save()
-            return redirect('program', program.id)
+            return redirect('program', business_unit.id)
         context = {
             'form': form
         }
-        return render(request, 'program/program_form.html', context)
+        return render(request, 'program/business_unit_form.html', context)
 
 
 
@@ -166,4 +165,4 @@ def businessUnitDelete(request, pk):
         context = {
             'program' : program,
         }
-        return render(request, 'program/program_delete_confirmation.html')
+        return render(request, 'program/business_unit_delete_confirmation.html')

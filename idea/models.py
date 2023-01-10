@@ -19,6 +19,8 @@ class Idea(models.Model):
         (6, 'Put On Hold'),
         (7, 'Rejected'),
     )
+    fields = ['Pending', 'Active', 'Handoff', 'Completed',
+              'Paused', 'Stopped', 'Put On Hold', 'Rejected']
 
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
@@ -54,7 +56,8 @@ class Idea(models.Model):
 
     def send_apply_email(self):
         program = self.program
-        to_mail_list = [program.coordinator.email, program.business_unit.jury.email, self.ideator.email]
+        to_mail_list = [program.coordinator.email,
+                        program.business_unit.jury.email, self.ideator.email]
         subject = f"Idea applied for project {program.name}"
         message = self.title + '\n' + self.summary
         send_mail(
@@ -67,7 +70,8 @@ class Idea(models.Model):
 
     def change_of_status_mail(self):
         program = self.program
-        to_mail_list = [program.coordinator.email, program.business_unit.jury.email]
+        to_mail_list = [program.coordinator.email,
+                        program.business_unit.jury.email]
         subject = f"Idea Status Changed to {self.getStatus()} for Idea {self.title}"
         message = self.title + '\n' + self.summary
         send_mail(
@@ -79,4 +83,4 @@ class Idea(models.Model):
         )
 
     class Meta:
-        ordering =['-updated', '-created']
+        ordering = ['-updated', '-created']
