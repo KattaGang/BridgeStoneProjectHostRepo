@@ -12,15 +12,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*$*af!*2s-h02f^i5&2fjs4(e^inp+_du-18@4i(ur%)iv+wet'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,15 +82,13 @@ WSGI_APPLICATION = 'IdeaManagementPlatform.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+import dj_database_url
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["PGDATABASE"],
-        'USER': os.environ["PGUSER"],
-        'PASSWORD': os.environ["PGPASSWORD"],
-        'HOST': os.environ["PGHOST"],
-        'PORT': os.environ["PGPORT"],
-    }
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
 
 
