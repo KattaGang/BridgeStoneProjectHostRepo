@@ -1,77 +1,50 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'styles/jury.css' %}">
 
-
-<section class="buunit">
-    <div class="container">
-        <h1>Business Units You are Jury for :</h1>
-        <div class="boxwrap">
-            {% for program in programs %}
-            <div class="bu bu1">
-
-                <i class="fa-solid fa-bullhorn fa-3x textred"></i>
-                <h2 class="mdheading">{{program.business_unit.name}}</h2>
-                <p>{{program.business_unit.description}}
-                </p>
-                <a href="#{{program.id}}">
-                    <button type="submit" class="btn btnsign">Click here </button></a>
-            </div>
-
-            {% endfor %}
-        </div>
-    </div>
-
-</section>
-{% for idea in ideas %}
-<section class="showcase" id="{{program.id}}">
-    <div class="container">
-        <div class="row">
-            <div class="imagebox">
-                <img src="{{idea.image.url}}" alt="">
-            </div>
-            <div class="textbox">
-                <h2 class="lgheading textdark">{{idea.title}}</h2>
-                <p class="textgray">{{idea.summary}}
-                    <br>
-                    <b>Ideator</b> - {{idea.ideator.username}}
-                </p>
-                <a href="{% url 'idea' idea.id %}" class="btn btnsec textred">View</a>
-            </div>
-        </div>
-    </div>
-</section>
-{% endfor %}
-</section>
-
-
-
-
-<div>
+     <section class="jury">
+        <div class="container">
+            <div class="formwrap">
+                <div class="filter">
+                    <div class="filterhead">
+                        <i class="fa-solid fa-filter fa-4x textred"></i>
+                        <h2 class="textgray mdheading">Filters</h2>
+                    </div>
+                    <label for="Visited">Visited</label>
+                    <input type="radio" name="" id="Visited"><br>
+                    <label for="Non-Visited">Non-Visited</label>
+                    <input type="radio" name="" id="Non-Visited"><br>
+                    <label for="Accepted">Accepted</label>
+                    <input type="radio" name="" id="Accepted"><br>
+                    <label for="Rejected">Rejected</label>
+                    <input type="radio" name="" id="Rejected"><br>
+                    <label for="Hold">Hold</label>
+                    <input type="radio" name="" id="Hold"><br>
     
-</div>
-<div>
-    {% for program in programs %}
-    <p>
-        <a href="{% url 'program' program.id %}">
-            {{program}}
-        </a>
-    </p>
-    {% endfor %}
-</div>
-<hr>
-<div>
-    Ideas To be evaluated :
-</div>
-<div>
-    {% for idea in ideas %}
-    <p>
-        <a href="{% url 'idea' idea.id %}">
-            {{idea}}
-        </a>
-        <a href="{% url 'idea-accept' idea.id %}">Accept</a>
-        <a href="{% url 'idea-reject' idea.id %}">Reject</a>
-        <a href="{% url 'idea-put-on-hold' idea.id %}">Put On Hold</a>
-    </p>
-    {% endfor %}
-</div>
-{% endblock content %}
+                    <button type="submit" class="btn btnsign">Apply</button>
+                </div>
+                {% for idea in ideas %}
+                <form class="juryform"> 
+                    <div class="formgroup">
+                        <label for="name">Name of Ideater</label>
+                        <input type="text" name="" value="{{idea}}" id="name">
+                    </div>
+                    <div class="formgroup">
+                        <label for="department">Name of Department</label>
+                        <input type="text" name="" id="department">
+                    </div>
+                    <div class="formgroup">
+                        <label for="Title_idea">Title of Idea</label>
+                        <input type="text" name="Title_idea" id="Title_idea" >
+                        <button type="submit" class="btn btnsign">Apply</button>
+                    </div>
+
+                </form>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+     </section>
+ {% endblock content %}

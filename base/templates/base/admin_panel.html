@@ -41,5 +41,17 @@
   <li class="navitem "></li>
     <a href="{% url 'business-unit-create' %}" class="btn btnsec textred">Add Business Unit</a></li>
   </li>
+  <li class="navitem "></li>
+    <a href="{% url 'invite' %}" class="btn btnsec textred">Send Invitation</a></li>
+  </li>
 </ul>
+
+<br>
+Invitations :
+{% for invitation in invitations %}
+<p>
+  {{invitation}}
+</p>
+<p>  <a href="{% url 'invitation' invitation.id %}">View</a></p>
+{% endfor %}
 {% endblock content %}

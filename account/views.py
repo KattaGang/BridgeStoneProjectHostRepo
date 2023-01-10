@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import ProfileForm
-from .models import Profile
+from .models import Profile, Invitation
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -105,6 +105,37 @@ def profileUpdate(request):
         'messages': messages,
     }
     return render(request, 'account/profile_form.html', context)
+
+
+@login_required(login_url='login')
+def inviteUser(request):
+    if not request.user.profile.is_admin:
+        return redirect('access-denied')
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        if request.POST.get('r1'):
+            post = 'Admin'
+        else:
+            post = 'Jury'
+        invite = Invitation(name=name, email=email, post=post)
+        print(invite.post)
+        invite.admin = request.user
+        print(invite)
+        invite.save()
+        return redirect('admin-panel')
+    return render(request, 'account/invitation_form.html')
+
+
+@login_required(login_url='login')
+def viewInvitation(request, pk):
+    invitation = Invitation.objects.get(id=pk)
+    # if (request.user.email != invitation.email) and (request.user != invitation.admin):
+    #     return redirect('access-denied')
+    context = {
+        'invitation': invitation,
+    }
+    return render(request, 'account/invitation.html', context)
 
 
 def accessDenied(request):

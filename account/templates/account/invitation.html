@@ -1,0 +1,16 @@
+{% extends 'account/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+    <header class="header">
+        {% include 'navbar.html' %}
+       <section class=" signup">
+        <h2 class="lgheading textlight">{{invitation}}</h2>
+        <form class="signupform" method="POST">
+          {% csrf_token %}
+                <button type="submit" class="btn btnsign">Accept </button>
+                </div>
+        </form>
+    </section>  
+    </header>
+{% endblock content %}

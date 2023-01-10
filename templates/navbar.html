@@ -10,7 +10,7 @@
                 {% if request.user.profile.is_admin %}
                 <li class="navitem "><a href="{% url 'admin-panel' %}">Admin Panel</a></li>
                 {% endif %}
-                <li class="navitem "><a href="{% url 'profile' request.user.profile.id %}">PROFILE</a></li>
+                <li class="navitem "><a href="{% url 'profile' request.user.id %}">PROFILE</a></li>
                 <li class="navitem "><a href="{% url 'logout' %}">LOGOUT</a></li>
             </ul>
             <div class="clearfix"></div>

@@ -12,4 +12,6 @@ urlpatterns = [
     path('profile-list/', views.profileList, name='profile-list'),
     path('access-denied/', views.accessDenied, name='access-denied'),
     path('user-profile/', views.userProfile, name='user-profile'),
+    path('invite/', views.inviteUser, name='invite'),
+    path('view-invitation/<int:pk>/', views.viewInvitation, name='invitation')
 ]

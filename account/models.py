@@ -22,7 +22,18 @@ class Profile(models.Model):
     image = models.ImageField(default='default.png', upload_to='profile_pics')
 
     jury_programs = models.ManyToManyField(Program, blank=True)
-    jury_business_unit = models.ForeignKey(BusinessUnit, null=True, blank=True, on_delete=models.SET_NULL)
+    jury_business_unit = models.ForeignKey(
+        BusinessUnit, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.user.username
+
+
+class Invitation(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    post = models.CharField(max_length=10)
+    admin = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"Invited {self.name} for the post {self.post} by {self.admin}" + f" email - {self.email}"

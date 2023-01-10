@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea submission registration portal
+    </title>
+    <link rel="stylesheet" href="{% static 'styles/style-2.css' %}">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"/> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <h2>Registration</h2>
+        <div class="form-container">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="Role">
+                    <h3>Choose Role</h3>
+                    <input type="checkbox" class="Role" name="r1">
+                    <label>Admin</label>
+
+                    <input type="checkbox" class="Role" name="r2">
+                    <label>Innovation Champion</label>
+                </div>
+
+                <div class="name">
+                    <!-- <h3>Name</h3> -->
+                    <i class="fa fa-user-circle"></i>
+                    </i>
+                    <input type="text" placeholder="Enter Name" class="name" name="name">
+                </div>
+
+                <div class="input-email">
+                    <!-- <h3>Email-id</h3> -->
+                    <i class="fa fa-envelope email">
+                    </i>
+                    <input type="text" placeholder="Enter Email id" class="email" name="email">
+                </div>
+
+
+                <div class="group">
+                    <h4>Focus Group - </h4>
+                    <select class="focus-group" name="focus-group">
+                        <option>Focus Group</option>
+                        <option>Group - A</option>
+                        <option>Group - B</option>
+                        <option>Group - C</option>
+                        <option>Group - D</option>
+                    </select>
+                    <div class="arrow"></div>
+
+                    <span>
+                        <h3>specializations</h3>
+                        <input type="text" placeholder="Specialization" name="specialzation" class="group">
+
+                    </span>
+                </div>
+
+                <div class="btn">
+                    <input type="submit" value="Invite" class="btn" />
+                    <!-- <a href="" type="submit" class="btn" >Invite</a> -->
+                </div>
+            </form>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+
+
+</body>
+
+</html>

@@ -38,7 +38,7 @@ def programCreate(request):
         }
         return render(request, 'program/program_form.html', context)
     else:
-        form = ProgramForm(request.POST)
+        form = ProgramForm(request.POST, request.FILES)
         if form.is_valid():
             program = form.save(commit=False)
             program.coordinator = request.user
@@ -62,7 +62,7 @@ def programUpdate(request, pk):
         }
         return render(request, 'program/program_form.html', context)
     else:
-        form = ProgramForm(request.POST, instance=program)
+        form = ProgramForm(request.POST, request.FILES, instance=program)
         if form.is_valid():
             form.save()
             return redirect('program', program.id)
@@ -75,15 +75,17 @@ def programUpdate(request, pk):
 
 @login_required(login_url='login')
 def programDelete(request, pk):
+    if not request.user.profile.is_admin:
+        return redirect('access-denied')
     program = Program.objects.get(id=pk)
     if request.method == 'POST':
         program.delete()
-        return redirect('program-list')
+        return redirect('home')
     else:
         context = {
             'program' : program,
         }
-        return render(request, 'program/program_delete_confirmation.html')
+        return render(request, 'program/program_delete_confirmation.html', context)
 
 
 

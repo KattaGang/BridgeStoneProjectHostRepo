@@ -65,7 +65,7 @@ class Idea(models.Model):
             message,
             'wcedummy7798@gmail.com',
             to_mail_list,
-            fail_silently=False
+            fail_silently=True
         )
 
     def change_of_status_mail(self):
@@ -79,7 +79,7 @@ class Idea(models.Model):
             message,
             'wcedummy7798@gmail.com',
             to_mail_list,
-            fail_silently=False
+            fail_silently=True
         )
 
     class Meta:
