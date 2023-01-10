@@ -1,1 +1,1 @@
-web: gunicorn IdeaManagementPlatform.wsgi
+web: python manage.py migrate && gunicorn IdeaManagementPlatform.wsgi
