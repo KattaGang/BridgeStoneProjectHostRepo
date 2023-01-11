@@ -15,6 +15,10 @@ def juryIdeaList(request):
     user = request.user
     business_units = BusinessUnit.objects.filter(jury=user)
     programs = Program.objects.filter(business_unit=None)
+    try:
+        business_unit = BusinessUnit.objects.get(jury=request.user)
+    except:
+        business_unit = None
     for business_unit in business_units:
         programs = programs | Program.objects.filter(business_unit=business_unit)
     ideas = Idea.objects.filter(business_unit=business_unit)

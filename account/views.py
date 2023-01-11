@@ -1,11 +1,12 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import ProfileForm
+from .forms import ProfileForm, InvitationForm
 from .models import Profile, Invitation
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from program.models import BusinessUnit
 # Create your views here.
 
 
@@ -70,8 +71,10 @@ def userProfile(request):
 
 def profile(request, pk):
     user = User.objects.get(id=pk)
+    invitations = Invitation.objects.filter(email=user.email)
     context = {
         'user': user,
+        'invitations' : invitations,
     }
     return render(request, 'account/profile.html', context)
 
@@ -112,19 +115,21 @@ def inviteUser(request):
     if not request.user.profile.is_admin:
         return redirect('access-denied')
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
+        form = InvitationForm(request.POST)
+        invite = form.save(commit=False)
         if request.POST.get('r1'):
-            post = 'Admin'
+            invite.post = 'Admin'
         else:
-            post = 'Jury'
-        invite = Invitation(name=name, email=email, post=post)
-        print(invite.post)
+            invite.post = 'Jury'
         invite.admin = request.user
-        print(invite)
         invite.save()
         return redirect('admin-panel')
-    return render(request, 'account/invitation_form.html')
+    business_units = BusinessUnit.objects.all()
+    context = {
+        'business_units' : business_units,
+        'form' : InvitationForm(),
+    }
+    return render(request, 'account/invitation_form.html', context)
 
 
 @login_required(login_url='login')
@@ -133,10 +138,14 @@ def viewInvitation(request, pk):
     if (request.user.email != invitation.email) and (request.user != invitation.admin):
         return redirect('access-denied')
     if request.method == 'POST':
-        if invitation.post == 'Jury':
+        if request.user.email != invitation.email:
+            return redirect('access-denied')
+        if invitation.post == 'Admin':
             request.user.profile.is_admin = True
         else:
             request.user.profile.is_jury = True
+            invitation.business_unit.jury = request.user
+            invitation.business_unit.save()
         request.user.profile.save()
         return redirect('user-profile')
     context = {
@@ -144,6 +153,13 @@ def viewInvitation(request, pk):
     }
     return render(request, 'account/invitation.html', context)
 
+@login_required(login_url='login')
+def withdrawInvitation(request, pk):
+    if not request.user.profile.is_admin:
+        return redirect('access-denied')
+    invitation = Invitation.objects.get(id=pk)
+    invitation.delete()
+    return redirect('admin-panel')
 
 def accessDenied(request):
     return render(request, 'access_denied.html')

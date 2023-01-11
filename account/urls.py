@@ -13,5 +13,6 @@ urlpatterns = [
     path('access-denied/', views.accessDenied, name='access-denied'),
     path('user-profile/', views.userProfile, name='user-profile'),
     path('invite/', views.inviteUser, name='invite'),
-    path('view-invitation/<int:pk>/', views.viewInvitation, name='invitation')
+    path('view-invitation/<int:pk>/', views.viewInvitation, name='invitation'),
+    path('withdraw-invitation/<int:pk>/', views.withdrawInvitation, name='invitation-withdraw'),
 ]

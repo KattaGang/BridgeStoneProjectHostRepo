@@ -5,7 +5,12 @@
     <header class="header">
         {% include 'navbar.html' %}
        <section class=" signup">
-        <h2 class="lgheading textlight">{{invitation}}</h2>
+        <h2 class="lgheading textlight">{{invitation}}
+        {% if invitation.business_unit %}
+        <br>
+            For business unit {{invitation.business_unit}}
+        {% endif %}
+    </h2>
         <form class="signupform" method="POST">
           {% csrf_token %}
                 <button type="submit" class="btn btnsign">Accept </button>

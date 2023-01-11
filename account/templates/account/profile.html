@@ -26,5 +26,10 @@
         <a href="{% url 'idea-list' %}" style="color: aliceblue;">View Ideas</a>
     </button>
     {% endif %}
+    {% for invitation in invitations %}
+    <a href="{% url 'invitation' invitation.id %}">View</a>
+    <br>
+    {{invitation}}
+    {% endfor %}
 </div>
 {% endblock content %}

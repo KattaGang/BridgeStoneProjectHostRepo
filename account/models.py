@@ -34,6 +34,7 @@ class Invitation(models.Model):
     email = models.CharField(max_length=200)
     post = models.CharField(max_length=10)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    business_unit = models.ForeignKey(BusinessUnit, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Invited {self.name} for the post {self.post} by {self.admin}" + f" email - {self.email}"

@@ -23,6 +23,7 @@
         <div class="form-container">
             <form action="" method="POST">
                 {% csrf_token %}
+                
                 <div class="Role">
                     <h3>Choose Role</h3>
                     <input type="checkbox" class="Role" name="r1">
@@ -48,14 +49,13 @@
 
 
                 <div class="group">
-                    <h4>Focus Group - </h4>
-                    <select class="focus-group" name="focus-group">
-                        <option>Focus Group</option>
-                        <option>Group - A</option>
-                        <option>Group - B</option>
-                        <option>Group - C</option>
-                        <option>Group - D</option>
-                    </select>
+                    <h4>Business Unit - </h4>
+                    <select class="focus-group" name="business_unit" required="" id="id_busiess_unit">
+                        <option value="" selected="">Business Unit</option>
+                        {% for business_unit in business_units %}
+                        <option value="{{business_unit.id}}">{{business_unit.name}}</option>
+                        {% endfor %}
+                      </select>
                     <div class="arrow"></div>
 
                     <span>

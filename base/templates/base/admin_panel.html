@@ -36,22 +36,51 @@
 
 <ul class="navitems textlight">
   <li class="navitem "></li>
-    <a href="{% url 'program-create' %}" class="btn btnsec textred">Add Program</a></li>
+  <li>
+    <button class="btn btnsec textred">
+      <a href="{% url 'program-create' %}" class="textred">Add Program</a>
+    </button>
   </li>
-  <li class="navitem "></li>
-    <a href="{% url 'business-unit-create' %}" class="btn btnsec textred">Add Business Unit</a></li>
-  </li>
-  <li class="navitem "></li>
-    <a href="{% url 'invite' %}" class="btn btnsec textred">Send Invitation</a></li>
+  <li>
+    <button class="btn btnsec textred">
+      <a href="{% url 'business-unit-create' %}" class="textred">Add Business Unit</a>
+    </button>
+  </li><li>
+    <button class="btn btnsec textred">
+      <a href="{% url 'invite' %}" class="textred">Send Invitation</a>
+    </button>
   </li>
 </ul>
 
 <br>
 Invitations :
-{% for invitation in invitations %}
-<p>
+<ul class="navitems textlight">
+  {% for invitation in invitations %}
+<li style="color: black;">
   {{invitation}}
-</p>
-<p>  <a href="{% url 'invitation' invitation.id %}">View</a></p>
+</li>
+<li>
+  <button class="btn btnsec textred">
+    <a href="{% url 'invitation' invitation.id %}" class="textred">View</a>
+  </button>
+</li>
+<li>
+  <button class="btn btnsec textred">
+    <a href="{% url 'invitation-withdraw' invitation.id %}" class="textred">Withdraw</a>
+  </button>
+</li>
 {% endfor %}
+<hr>
+  <li class="navitem "></li>
+  
+  <li>
+    <button class="btn btnsec textred">
+      <a href="{% url 'business-unit-create' %}" class="textred">Add Business Unit</a>
+    </button>
+  </li><li>
+    <button class="btn btnsec textred">
+      <a href="{% url 'invite' %}" class="textred">Send Invitation</a>
+    </button>
+  </li>
+</ul>
 {% endblock content %}
