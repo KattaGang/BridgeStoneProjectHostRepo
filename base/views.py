@@ -3,6 +3,7 @@ from program.models import Program, BusinessUnit
 from django.contrib.auth.decorators import login_required
 from idea.models import Idea
 from account.models import Invitation
+from IdeaManagementPlatform.settings import HOST_URL
 # Create your views here.
 
 
@@ -45,4 +46,7 @@ def adminPanel(request):
 
 @login_required(login_url='login')
 def ideaActivity(request):
-    return render(request, 'base/idea_activity_chart.html')
+    context = {
+        'HOST_URL' : HOST_URL,
+    }
+    return render(request, 'base/idea_activity_chart.html', context)

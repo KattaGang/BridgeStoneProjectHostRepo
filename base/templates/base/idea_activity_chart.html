@@ -12,7 +12,7 @@
     var xValues = ["02/01/2022", "02/02/2022", "02/03/2022", "02/04/2022", "02/05/2022", "02/06/2022", "02/07/2022", "02/08/2022", "02/09/2022", "02/10/2022", "02/11/2022"];
     var yValues = [70, 80, 50, 10, 90, 99, 110, 116, 140, 130, 75];
     let getXvals = async () => {
-        let response = await fetch('http://127.0.0.1:8000/api/get-idea-activity/')
+        let response = await fetch('{{HOST_URL}}api/get-idea-activity/')
         let ideas = await response.json()
         xValues = ideas['dates']
         yValues = ideas['freq']

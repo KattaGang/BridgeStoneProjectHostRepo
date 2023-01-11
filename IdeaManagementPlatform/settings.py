@@ -154,3 +154,5 @@ EMAIL_USE_TLS=True
 CSRF_TRUSTED_ORIGINS = ['https://bridgestoneprojecthostrepo-production.up.railway.app']
 
 CORS_ALLOW_ALL_ORIGINS=True
+
+HOST_URL=os.getenv('HOST_URL')
