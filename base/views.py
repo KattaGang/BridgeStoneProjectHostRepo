@@ -31,7 +31,7 @@ def adminPanel(request):
         no_ideas.append(ideas.filter(status=st).count())
     invitations = Invitation.objects.filter(admin=request.user)
     context = {
-        # 'invitations' : invitations,
+        'invitations' : invitations,
         'number_ideas' : {
             "Complete" : ideas.filter(status=3).count(),
             "Paused" : ideas.filter(status=4).count(),
