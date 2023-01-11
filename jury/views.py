@@ -14,14 +14,11 @@ def juryIdeaList(request):
         return redirect('access-denied')
     user = request.user
     business_units = BusinessUnit.objects.filter(jury=user)
-    programs = Program.objects.filter(business_unit=None)
-    try:
-        business_unit = BusinessUnit.objects.get(jury=request.user)
-    except:
-        business_unit = None
+    programs = Program.objects.filter(id=-1)
+    ideas = Idea.objects.filter(id=-1)
     for business_unit in business_units:
         programs = programs | Program.objects.filter(business_unit=business_unit)
-    ideas = Idea.objects.filter(business_unit=business_unit)
+        ideas = ideas | Idea.objects.filter(business_unit=business_unit)
     if request.method == 'POST':
         ideas = Idea.objects.filter(id=-1)
         for i in range(0, 8):
