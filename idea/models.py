@@ -25,7 +25,7 @@ class Idea(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     summary = models.TextField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True,
+    image = models.ImageField(default='default.png',
                               upload_to='static/images/')
     business_unit = models.ForeignKey(
         BusinessUnit, null=True, on_delete=models.CASCADE)

@@ -15,7 +15,11 @@
                 </p>
                 <a href="#{{business_unit.id}}">
                     <button type="submit" class="btn btnsign">Click here </button></a>
-            </div>
+            {% if request.user.profile.is_admin %}
+            <a href="{% url 'business-unit-update' business_unit.id %}">
+                <button type="submit" class="btn btnsign">Update </button></a>
+            {% endif %}
+                </div>
 
             {% endfor %}
         </div>
@@ -38,7 +42,14 @@
                     Duration <br>{{program.start_time}} to
                     {{program.end_time}} <br>Idea submission <br>{{program.application_start_time}} to
                     {{program.application_end_time}}</p>
-                <a href="{% url 'idea-create' program.id %}" class="btn btnsec textred">Apply</a>
+                <a href="{% url 'idea-create' program.id %}">
+                    <button type="submit" class="btn btnsec textred">Apply</button></a>
+                    <a href="{% url 'program' program.id %}">
+                        <button type="submit" class="btn btnsec textred">View</button></a>
+                {% if request.user.profile.is_admin %}
+                <a href="{% url 'program-update' program.id %}">
+                    <button type="submit" class="btn btnsec textred">Update </button></a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -51,8 +62,8 @@
         <h1>KNOW YOUR IDEA CHAMPION</h1>
         <div class="boxwrap">
             {% for business_unit in business_units %}
+            {% if business_unit.jury %}
             <div class="champ champ1">
-
                 <i class="fa-solid fa-user fa-6x textred"></i>
 
                 <h3 class="mdheading">{{business_unit.jury.profile}}</h3>
@@ -60,7 +71,9 @@
                 <a href="{% url 'profile' business_unit.jury.profile.id %}">
                     <button type="submit" class="btn btnsign">Click here to view Profile </button>
                 </a>
+
             </div>
+            {% endif %}
             {% endfor %}
 
             <div class="clearfix"></div>

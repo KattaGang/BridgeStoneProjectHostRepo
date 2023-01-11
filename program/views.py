@@ -137,6 +137,8 @@ def businessUnitCreate(request):
 
 @login_required(login_url='login')
 def businessUnitUpdate(request, pk):
+    if not request.user.profile.is_admin:
+        return redirect('access-denied')
     business_unit = BusinessUnit.objects.get(id=pk)
     if request.method == 'GET':
         form = BusinessUnitForm(instance=business_unit)
@@ -145,10 +147,10 @@ def businessUnitUpdate(request, pk):
         }
         return render(request, 'program/program_form.html', context)
     else:
-        form = BusinessUnitForm(request.POST, instance=business_unit)
+        form = BusinessUnitForm(request.POST, request.FILES, instance=business_unit)
         if form.is_valid():
             form.save()
-            return redirect('program', business_unit.id)
+            return redirect('home')
         context = {
             'form': form
         }
@@ -158,6 +160,8 @@ def businessUnitUpdate(request, pk):
 
 @login_required(login_url='login')
 def businessUnitDelete(request, pk):
+    if not request.user.profile.is_admin:
+        return redirect('access-denied')
     business_unit = BusinessUnit.objects.get(id=pk)
     if request.method == 'POST':
         business_unit.delete()

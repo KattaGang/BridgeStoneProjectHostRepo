@@ -1,32 +1,417 @@
 {% extends 'main.html' %}
 {% block content %}
 {% load static %}
-<div>
-    <h1>{{idea.title}}</h1>
-</div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
 
-<div>
-    <p>
-        Status : {{idea_status}}
-    </p>
-</div>
-<div>
-    <p>
-        Idea Champion - {{jury}}
-    </p>
-</div>
-<hr>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-<div>
-    <p>
-        {{idea.description}}
-    </p>
+    html {
+        font-size: 62.5%;
+    }
+
+    body {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        line-height: 1.7;
+        background-color: #a9a9a94a
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    a {
+        font-size: 1.6rem;
+        text-decoration: none;
+    }
+
+    p,
+    li {
+        font-size: 1.6rem;
+        margin-bottom: 0.5em;
+        letter-spacing: 0.15em;
+    }
+
+    h1,
+    h3 {
+        margin-bottom: 0.5em;
+        letter-spacing: 0.15em;
+        font-weight: 700;
+    }
+
+    container {
+        max-width: 1200px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .lgheading {
+        font-size: 3.5rem;
+    }
+
+    .mdheading {
+        font-size: 2.2rem;
+    }
+
+    .textred {
+        color: #e63946;
+    }
+
+    .textlight {
+        color: #f4f4f4;
+    }
+
+    .textdark {
+        color: #333;
+    }
+
+    .textgray {
+        color: #555;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.5em 1.5em;
+        font-weight: 500;
+        margin: 0.5em 0;
+        border-radius: 100px;
+    }
+
+    .btnpri {
+        background-color: white;
+    }
+
+    .btnsec {
+        border: 1px solid #e63946;
+    }
+
+    .btn:hover {
+        background-color: #aaa;
+    }
+
+    .bgdark {
+        background-color: #263238;
+    }
+
+    .navbar {
+        padding: 1rem;
+    }
+
+    .navbar .logo {
+        float: left;
+        font-size: 3.5rem;
+    }
+
+    .navbar .navitems {
+        float: right;
+        margin-top: 1rem;
+        color: #ddd;
+    }
+
+    .navbar .navitem {
+        display: inline-block;
+        padding: 1rem;
+    }
+
+    .clearfix {
+        clear: both;
+    }
+
+    .navbar a:hover {
+        border-bottom: 1px solid white;
+    }
+
+    .navbar a {
+        padding-bottom: 0.3rem;
+    }
+
+    .navbar a {
+        color: white;
+    }
+
+    .body {
+        background-color: #555;
+        position: relative;
+
+    }
+
+
+
+
+    .container2 {
+        background-color: beige;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 190vh;
+        width: 66%;
+        margin: 3% 10% 3% 10%;
+        position: relative;
+        left: 8%;
+    }
+
+    .box1 {
+        background-color: #e63946;
+        height: 60vh;
+        width: 97%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #ddd;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+
+    .image-1 {
+        height: 110%;
+        width: 56%;
+        padding: 1%;
+        margin: 1%;
+    }
+
+    .title-1 {
+
+        padding: 0px;
+        box-sizing: border-box;
+        margin-top: 1%;
+    }
+
+
+
+    .box2 {
+        background-color: cadetblue;
+        height: 40vh;
+        width: 97%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #ddd;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 2%;
+    }
+
+    .paragraph {
+        padding-top: 1%;
+    }
+
+    .paragraph p {
+        font-size: large;
+    }
+
+    .Title-2 {
+        margin-bottom: 2%;
+        margin-top: 3%;
+    }
+
+    .paragraph {
+        padding: 0% 3% 0% 3%;
+        font-size: inherit;
+        margin-bottom: 3%;
+    }
+
+    .box3 {
+        background-color: coral;
+        height: 40vh;
+        width: 97%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #ddd;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+
+    .sub-box1 {
+        display: flex;
+        margin-top: 30px;
+        justify-content: space-around;
+        width: 90%;
+        height: 90%;
+    }
+
+    .image-2 img {
+        border-radius: 22px;
+    }
+
+    .sub-box1.image-2 {
+        margin-left: 0%;
+        margin-right: 0%;
+        position: relative;
+        right: 58%;
+        width: 30%;
+    }
+
+    .ideator {
+        display: grid;
+        grid-template-rows: 25% 25% 25% 23% 10%;
+        grid-template-columns: 71% 143%;
+        row-gap: 5%;
+        position: relative;
+        right: 80px;
+    }
+
+    .item-1 {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .item-2 {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .item-3 {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .item-4 {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .item-5 {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .item-6 {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .box4 {
+        background-color: blueviolet;
+        height: 25vh;
+        width: 97%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        color: #ddd;
+        font-size: 12px;
+        font-weight: bold;
+        position: relative;
+
+
+
+    }
+
+    .Title-4 {
+        position: relative;
+    }
+
+    .button {
+        position: relative;
+        background-color: rgb(9, 177, 17);
+        color: antiquewhite;
+        width: 22%;
+        display: flex;
+        justify-content: center;
+        border-radius: 15px;
+    }
+
+    .footer {
+        background-color: #263238;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .i {
+        padding: 2rem;
+    }
+
+    .socialmedia i {
+        margin: 2rem;
+    }
+</style>
+
+<div class="container2">
+    <div class="box1">
+        <div class="Title-1">
+            <h1>Image of Idea</h1>
+        </div>
+        <img src="{{idea.image.url}}" alt="" class="image-1">
+    </div>
+    <div class="box2">
+        <div class="Title-2">
+            <h1>Idea Description</h1>
+        </div>
+        <div class="paragraph">
+            <p>{{idea.description}}</p>
+        </div>
+    </div>
+    <div class="box3">
+        <div class="Title-3">
+            <h1>About Ideator</h1>
+        </div>
+        <div class="sub-box1">
+
+            <div class="image-2">
+                <img src="jury-1.jpeg" alt="">
+            </div>
+
+            <div class="ideator">
+                <div class="item-1">Name</div>
+                <div class="item-2">{{idea.ideator.profile.name}}</div>
+                <div class="item-3">Experience</div>
+                <div class="item-4">{{idea.ideator.profile.years_of_experience}}</div>
+                <div class="item-5">Working Post</div>
+                <div class="item-6">Manager</div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="box4">
+        <div class="Title-4">
+            <h1>Status of Idea</h1>
+        </div>
+
+        <div class="button">
+            <h1>{{idea.getStatus}}</h1>
+        </div>
+    </div>
+
 </div>
-{% if idea.image %}
-<div>
-    <img src="{{idea.image.url}}" alt="">
-</div>
-{% endif %}
 <hr>
 {% if idea.ideator == request.user %}
 <a href="{% url 'idea-update' idea.id %} " class="btn btnsec textred">Update</a>

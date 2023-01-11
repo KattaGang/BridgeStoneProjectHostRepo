@@ -14,10 +14,10 @@ class Profile(models.Model):
         max_length=200, null=True, default='Not Specified')
     is_jury = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    mobile = models.IntegerField(null=True)
-    department = models.CharField(max_length=200, null=True, blank=True)
-    field_of_work = models.CharField(max_length=200, null=True, blank=True)
-    years_of_experience = models.DurationField(null=True, blank=True)
+    mobile = models.CharField(null=True, max_length=15)
+    department = models.CharField(max_length=200, null=True)
+    field_of_work = models.CharField(max_length=200, null=True)
+    years_of_experience = models.CharField(null=True, max_length=10)
 
     image = models.ImageField(default='default.png', upload_to='profile_pics')
 
