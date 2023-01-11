@@ -41,3 +41,8 @@ def adminPanel(request):
         },
     }
     return render(request, 'base/admin_panel.html', context)
+
+
+@login_required(login_url='login')
+def ideaActivity(request):
+    return render(request, 'base/idea_activity_chart.html')

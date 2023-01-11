@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('jury.urls')),
     path('', include('account.urls')),
     path('', include('program.urls')),
+    path('api/', include('api.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
