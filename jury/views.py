@@ -28,7 +28,6 @@ def juryIdeaList(request):
     context = {
         'user': user,
         'programs': programs,
-        'business_unit': business_unit,
         'ideas': ideas,
     }
     return render(request, 'jury/jury_idea_list.html', context)
