@@ -24,7 +24,7 @@ def juryIdeaList(request):
         for i in range(0, 8):
             if request.POST.get(str(i)):
                 newideas = newideas | ideas.filter(status=i)
-            ideas = newideas
+        ideas = newideas
     context = {
         'user': user,
         'programs': programs,
