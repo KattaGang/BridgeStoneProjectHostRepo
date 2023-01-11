@@ -12,6 +12,11 @@ def getRoutes(request):
     routes = [
         'GET /api/programs/',
         'GET /api/ideas/',
+        'GET /api/business_units/',
+        'GET /api/program/<int:pk>/',
+        'GET /api/idea/<int:pk>/',
+        'GET /api/business_unit/<int:pk>/',
+        'GET /api/get-idea-activity/',
     ]
     return Response(routes)
 # --------------- Idea -------------
