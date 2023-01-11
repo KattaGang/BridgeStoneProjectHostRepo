@@ -16,7 +16,6 @@
         let ideas = await response.json()
         xValues = ideas['dates']
         yValues = ideas['freq']
-        console.log(xValues)
         new Chart("myChart", {
         type: "line",
         data: {
@@ -32,8 +31,9 @@
         },
 
     })
+    return ideas;
     }
-    getXvals();
+    console.log(getXvals());
     
     // new Chart("myChart", {
     //     type: "line",
